@@ -1,107 +1,108 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
-import matplotlib.pyplot as plt
 import pandas as pd
 import io
 import base64
-from typing import Dict, Any
+import matplotlib.pyplot as plt
 from collections import Counter
-
-# Import your preprocessing function (make sure it's in preprocess.py)
 from preprocess import preprocess_dataframe, wordcloud_to_base64
 
-
-def plot_to_base64():
-    # Create a simple plot
-    plt.plot([1, 2, 3, 4], [10, 20, 25, 30])
-    plt.title("Example Plot")
-
-    # Create an in-memory bytes buffer
-    buf = io.BytesIO()
-
-    # Save the plot to the buffer
-    plt.savefig(buf, format="png", bbox_inches="tight")
-    plt.close()  # Close the figure to free memory
-
-    # Move to the beginning of the buffer
-    buf.seek(0)
-
-    # Encode as base64
-    img_b64 = base64.b64encode(buf.read()).decode("utf-8")
-
-    return img_b64
+app = FastAPI(title="Reddit Sentiment Analysis API")
 
 
-# Example usage (you can comment this out in production)
-if __name__ == "__main__":
-    b64_string = plot_to_base64()
-    print(b64_string[:100])  # Print only first 100 chars of the base64 string
-
-
-app = FastAPI()
+def ngrams_from_text(text: str, n: int):
+    tokens = text.split()
+    return [" ".join(tokens[i:i + n]) for i in range(len(tokens) - n + 1)]
 
 
 @app.post("/analyze")
-async def analyze_csv(file: UploadFile = File(...)) -> Dict[str, Any]:
+async def analyze_csv(
+    file: UploadFile = File(...),
+    sentiment: str = Form("overall")
+):
+    # --- Validate file ---
     if not file.filename.endswith(".csv"):
         raise HTTPException(status_code=400, detail="Please upload a CSV file")
 
-    contents = await file.read()
     try:
+        contents = await file.read()
         df = pd.read_csv(io.BytesIO(contents))
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error reading CSV: {e}")
 
-    # Preprocess: detect language, translate to English, clean, lemmatize
+    # --- Preprocess ---
     try:
         df_processed = preprocess_dataframe(df)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error in preprocessing: {e}")
 
-    analysis: Dict[str, Any] = {}
+    # --- Ensure category column ---
+    category_col = None
+    for col in ["category", "Category", "label", "Label"]:
+        if col in df_processed.columns:
+            category_col = col
+            break
+    if not category_col:
+        raise HTTPException(status_code=400, detail="No sentiment/category column found in CSV")
 
-    # 1) sentiment distribution if category exists
-    if "category" in df_processed.columns:
-        sentiment_counts = df_processed["category"].value_counts().to_dict()
-        analysis["sentiment_counts"] = sentiment_counts
+    # --- Filtering ---
+    sentiment = sentiment.lower()
+    filtered_df = df_processed.copy()
 
-    # 2) word / ngram counts
-    all_text = " ".join(df_processed["clean_comment"].astype(str).tolist())
-    words = [w for w in all_text.split() if w.strip()]
-    word_freq = Counter(words).most_common(50)
+    if sentiment == "overall":
+        pass
+    elif sentiment == "each":
+        return JSONResponse(content={
+            "mode": "each",
+            "sample_processed": filtered_df[["clean_comment", category_col]].to_dict(orient="records")
+        })
+    elif sentiment in ["negative", "negatives", "objections"]:
+        filtered_df = filtered_df[filtered_df[category_col].str.contains("negative|objection", case=False, na=False)]
+    elif sentiment in ["positive", "positives", "strongly positive"]:
+        filtered_df = filtered_df[filtered_df[category_col].str.contains("positive", case=False, na=False)]
+    elif sentiment in ["neutral", "neutrals"]:
+        filtered_df = filtered_df[filtered_df[category_col].str.contains("neutral", case=False, na=False)]
+    else:
+        # Match exact label
+        filtered_df = filtered_df[filtered_df[category_col].astype(str).str.lower() == sentiment]
+
+    # --- Always send sentiment_counts ---
+    sentiment_counts = df_processed[category_col].value_counts().to_dict()
+    filtered_counts = filtered_df[category_col].value_counts().to_dict()
+
+    if filtered_df.empty:
+        return JSONResponse(content={
+            "error": f"No data found for sentiment '{sentiment}'",
+            "sentiment_counts": sentiment_counts  # still return global counts
+        })
+
+    # --- Analysis results ---
+    analysis = {}
+    analysis["sentiment_counts"] = filtered_counts if filtered_counts else sentiment_counts
+
+    # Word frequency
+    all_text = " ".join(filtered_df["clean_comment"].astype(str).tolist())
+    word_freq = Counter(all_text.split()).most_common(50)
     analysis["top_words"] = word_freq
 
-    # 3) bigrams/trigrams (simple)
-    def ngrams_from_text(text: str, n: int):
-        tokens = text.split()
-        return [" ".join(tokens[i:i + n]) for i in range(len(tokens) - n + 1)]
+    # N-grams
+    analysis["top_bigrams"] = Counter(ngrams_from_text(all_text, 2)).most_common(25)
+    analysis["top_trigrams"] = Counter(ngrams_from_text(all_text, 3)).most_common(25)
 
-    bigrams = Counter(ngrams_from_text(all_text, 2)).most_common(25)
-    trigrams = Counter(ngrams_from_text(all_text, 3)).most_common(25)
-    analysis["top_bigrams"] = bigrams
-    analysis["top_trigrams"] = trigrams
+    # Wordcloud
+    analysis["wordcloud_base64"] = wordcloud_to_base64(all_text)
 
-    # 4) wordcloud image base64
-    img_b64 = wordcloud_to_base64(all_text)
-    analysis["wordcloud_base64"] = img_b64
+    # Metadata
+    analysis["total_comments"] = len(filtered_df)
+    analysis["unique_users"] = int(filtered_df["author"].nunique()) if "author" in filtered_df.columns else 0
+    analysis["avg_word_count"] = float(filtered_df["clean_comment"].str.split().str.len().mean())
 
-    # 5) simple metadata
-    analysis["n_rows"] = len(df_processed)
-    analysis["n_unique_comments"] = int(df_processed["clean_comment"].nunique())
-
-    # Return processed sample (first 10 rows) for quick inspection
-    analysis["sample_processed"] = (
-        df_processed[
-            ["clean_comment"] + [c for c in df_processed.columns if c != "clean_comment"]
-        ]
-        .head(10)
-        .to_dict(orient="records")
-    )
+    # Sample
+    analysis["sample_processed"] = filtered_df[[ "clean_comment", category_col ]].head(10).to_dict(orient="records")
 
     return JSONResponse(content=analysis)
 
 
-# Health check
 @app.get("/")
 def root():
     return {"status": "ok", "message": "Reddit Sentiment Analysis API is running."}
