@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pandas
+wordcloud
+matplotlib
+nltk
+langdetect
+deep-translator
+requests
+streamlit
