@@ -10,7 +10,7 @@
 
    5.1.python -m venv myenv
    
-   5.2.myenv/scripts/activate
+   5.2.myenv\scripts\activate
    
    5.3.pip install -r requirements.txt 
    
