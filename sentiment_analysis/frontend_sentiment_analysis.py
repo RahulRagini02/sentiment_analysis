@@ -266,28 +266,37 @@ if st.session_state.classified_df is not None:
             clause_data = data["clause_sentiment"]
 
             if isinstance(clause_data, dict) and len(clause_data) > 0:
-                st.title("📊 Sentiment % by Clause")
+                st.title("📊 Sentiment % by Clause ID")
 
+                # Convert dict → DataFrame
                 clause_df = pd.DataFrame(clause_data).T
                 clause_df = clause_df[["Positive", "Neutral", "Negative"]]
+
+                # 🔑 Map Clause → Clause_id from df
+                clause_mapping = dict(zip(df["Clause"], df["Clause_id"]))
+                clause_df.index = clause_df.index.map(lambda x: clause_mapping.get(x, x))
+
+                # ✅ Sort by Clause_id (convert to float for correct numeric order)
+                clause_df = clause_df.sort_index(key=lambda x: x.astype(str).astype(float))
 
                 n_clauses = len(clause_df)
                 index = np.arange(n_clauses)
                 bar_width = 0.25
 
-                fig, ax = plt.subplots(figsize=(7, max(4, n_clauses*0.5)))
+                fig, ax = plt.subplots(figsize=(7, max(4, n_clauses * 0.5)))
 
                 ax.barh(index - bar_width, clause_df["Positive"], height=bar_width, label="Positive", color="green")
                 ax.barh(index, clause_df["Neutral"], height=bar_width, label="Neutral", color="grey")
                 ax.barh(index + bar_width, clause_df["Negative"], height=bar_width, label="Negative", color="red")
 
                 ax.set_yticks(index)
-                ax.set_yticklabels(clause_df.index)
+                ax.set_yticklabels(clause_df.index)   # ✅ Sorted Clause_id here
+
                 ax.set_xlabel("Percentage (%)")
-                ax.set_title("Sentiment Distribution per Clause")
+                ax.set_title("Sentiment Distribution per Clause ID (Sorted)")
                 ax.legend()
                 st.pyplot(fig)
-            else:
-                st.warning("⚠️ Clause sentiment data is empty. Please check your CSV.")
+
+
         else:
             st.warning("⚠️ Clause sentiment data not available for the chart.")
