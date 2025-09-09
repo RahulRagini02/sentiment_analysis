@@ -138,34 +138,45 @@ if st.session_state.classified_df is not None:
         mime="text/csv"
     )
 
-    # Clause filter
+    # ---------------- Clause filter ----------------
     if "Clause" in df.columns:
-        clauses = sorted(df["Clause"].dropna().unique().tolist())
+        clauses = sorted(df["Clause_id"].dropna().unique().tolist())
         clauses.insert(0, "Overall")
     else:
         clauses = ["Overall"]
-    selected_clause = st.sidebar.selectbox("Choose Clause to Analyze", clauses)
+    selected_clause = st.sidebar.selectbox("Choose Clause ID", clauses)
 
-    # Label filter
+    # ---------------- Stakeholder filter ----------------
+    if "Stakeholders" in df.columns:
+        stakeholders = sorted(df["Stakeholders"].dropna().unique().tolist())
+        stakeholders.insert(0, "Overall")
+    else:
+        stakeholders = ["Overall"]
+    selected_stakeholder = st.sidebar.selectbox("Choose Stakeholder", stakeholders)
+
+    # ---------------- Label filter ----------------
     if "Label" in df.columns:
         labels = sorted(df["Label"].dropna().unique().tolist())
         labels.insert(0, "Overall")
     else:
         labels = ["Overall"]
-    selected_label = st.sidebar.selectbox("Choose Label to Analyze", labels)
+    selected_label = st.sidebar.selectbox("Choose Label", labels)
 
-    # Run Analysis
+    # ---------------- Run Analysis ----------------
     if st.sidebar.button("Run Analysis"):
         with st.spinner("📊 Analyzing..."):
-            # Filter DataFrame
+            # Apply filters step by step
             df_filtered = df.copy()
+
             if selected_clause != "Overall":
                 df_filtered = df_filtered[df_filtered["Clause"] == selected_clause]
+            if selected_stakeholder != "Overall":
+                df_filtered = df_filtered[df_filtered["Stakeholders"] == selected_stakeholder]
             if selected_label != "Overall":
                 df_filtered = df_filtered[df_filtered["Label"] == selected_label]
 
             if df_filtered.empty:
-                st.warning("No data found for the selected Clause/Label.")
+                st.warning("⚠️ No data found for the selected Clause/Stakeholder/Label.")
                 st.stop()
 
             # Convert filtered DataFrame to CSV bytes
@@ -180,7 +191,10 @@ if st.session_state.classified_df is not None:
                 st.error(f"API Error: {e}")
                 st.stop()
 
-        st.success("Analysis Complete!")
+        st.success("✅ Analysis Complete!")
+        # st.write("### Filtered Dataset Preview")
+        # st.dataframe(df_filtered)
+
 
         # ---------------- Top Statistics ----------------
         st.title("📊 Top Statistics")
