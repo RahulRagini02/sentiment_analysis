@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pandas
+torch
+transformers
+seaborn
+matplotlib
+wordcloud
+scikit-learn
+requests
+Pillow
+numpy
+python-multipart
