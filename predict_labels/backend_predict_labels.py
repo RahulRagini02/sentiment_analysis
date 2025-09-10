@@ -5,7 +5,7 @@ import os
 from pydantic import BaseModel
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset
-from predict_labels.preproces_predict_labels import preprocess_text
+from preproces_predict_labels import preprocess_text
 from captum.attr import IntegratedGradients
 import torch.nn.functional as F
 import torch 
