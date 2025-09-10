@@ -1,0 +1,101 @@
+ID,Clause_id,Clause,Stakeholders,Comment,Label,Confidence
+1,1.1,Freedom of Speech protected under First Amendment.,Industry,considered positive impact,Error,0.0
+2,2.1,Cybersecurity law requires real-name registration online.,Public,people will support this clause,Error,0.0
+3,3.1,Cybersecurity law requires real-name registration online.,Corporate,this clause is beneficial,Error,0.0
+4,1.2,Consumer Protection Act safeguards buyers from unfair practices.,Public,creates additional burden,negative,0.6254
+5,2.2,Health and Safety at Work Act ensures workplace safety.,Industry,maximum will agree with this,Error,0.0
+6,3.2,Health and Safety at Work Act ensures workplace safety.,Politician,we strongly support it,Error,0.0
+7,1.3,Anti-Discrimination laws prohibit bias in employment.,Public,we strongly support it,Error,0.0
+8,2.3,Data protection law requires companies to protect user data.,Corporate,it will help corporate employees,Error,0.0
+9,3.3,Minimum wage laws ensure fair pay for workers.,Industry,strongly support it,Error,0.0
+10,4.1,Freedom of Speech protected under First Amendment.,Corporate,most of the people will not suppoet it,negative,0.5713
+11,4.2,Freedom of Speech protected under First Amendment.,Corporate,most of the people will not suppoet it,negative,0.5713
+12,1.1,Health and Safety at Work Act ensures workplace safety.,Politician,considered positive impact,Error,0.0
+13,2.1,Anti-Discrimination laws prohibit bias in employment.,Public,it brings positive change,Error,0.0
+14,3.1,Environmental Protection Act mandates pollution control.,Corporate,not a good decision,negative,0.8403
+15,1.2,Data protection law requires companies to protect user data.,Public,wellreceived by stakeholders,Error,0.0
+16,2.2,Minimum wage laws ensure fair pay for workers.,Public,this clause is beneficial,Error,0.0
+17,3.2,Right to Information Act allows citizens to request government records.,Corporate,considered as positive,Error,0.0
+18,1.3,Freedom of Speech protected under First Amendment.,Politician,considered positive impact in society,Error,0.0
+19,2.3,Freedom of Speech protected under First Amendment.,Public,it brings positive change,Error,0.0
+20,3.3,Anti-Discrimination laws prohibit bias in employment.,Corporate,it will not be harmful for corporate employees,positive,0.633
+21,4.1,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,this clause is helpful,Error,0.0
+22,4.2,Cybersecurity law requires real-name registration online.,Corporate,it brings positive impact,Error,0.0
+23,1.1,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,creates additional profit,positive,0.7171
+24,2.1,Data protection law requires companies to protect user data.,Public,wellreceived by stakeholders,Error,0.0
+25,3.1,Environmental Protection Act mandates pollution control.,Public,impact is yet to be seen,positive,0.7495
+26,1.2,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,it is harmful for corporate employees,negative,0.9471
+27,2.2,Affordable Care Act provides healthcare access.,Politician,society will take it positively,Error,0.0
+28,3.2,Health and Safety at Work Act ensures workplace safety.,Public,people will support this,Error,0.0
+29,1.3,Freedom of Speech protected under First Amendment.,Corporate,negative impact to society,negative,0.9054
+30,2.3,Right to Information Act allows citizens to request government records.,Public,this clause is problematic,negative,0.9434
+31,3.3,Freedom of Speech protected under First Amendment.,Public,many disagree with this,negative,0.6495
+32,4.1,Environmental Protection Act mandates pollution control.,Industry,it will bring positive impact on industry,Error,0.0
+33,4.2,Affordable Care Act provides healthcare access.,Politician,this clause is problematic,negative,0.9434
+34,1.1,Data protection law requires companies to protect user data.,Politician,mixed opinions on this,positive,0.7591
+35,2.1,Cybersecurity law requires real-name registration online.,Public,people will not support it,negative,0.8865
+36,3.1,Data protection law requires companies to protect user data.,Industry,people will strongly support this,Error,0.0
+37,1.2,Environmental Protection Act mandates pollution control.,Corporate,good decision,Error,0.0
+38,2.2,Affordable Care Act provides healthcare access.,Industry,industry will get a lot of help from this,Error,0.0
+39,3.2,Data protection law requires companies to protect user data.,Politician,it brings challenges,Error,0.0
+40,1.3,Affordable Care Act provides healthcare access.,Politician,this clause is beneficial,Error,0.0
+41,2.3,Freedom of Speech protected under First Amendment.,Corporate,tv channels will misuse on it,positive,0.7475
+42,3.3,Affordable Care Act provides healthcare access.,Corporate,it brings positive change,Error,0.0
+43,4.1,Cybersecurity law requires real-name registration online.,Public,creates additional burden,negative,0.6254
+44,4.2,Environmental Protection Act mandates pollution control.,Public,helps improve the system,Error,0.0
+45,1.1,Freedom of Speech protected under First Amendment.,Public,it brings challenges,Error,0.0
+46,2.1,Right to Information Act allows citizens to request government records.,Politician,it brings positive change,Error,0.0
+47,3.1,Data protection law requires companies to protect user data.,Industry,considered regressive,positive,0.546
+48,1.2,Data protection law requires companies to protect user data.,Politician,considered progressive,positive,0.7395
+49,2.2,Environmental Protection Act mandates pollution control.,Public,helps improve the system,Error,0.0
+50,3.2,Affordable Care Act provides healthcare access.,Politician,this clause is beneficial,Error,0.0
+51,1.3,Data protection law requires companies to protect user data.,Public,helps improve the system,Error,0.0
+52,2.3,Cybersecurity law requires real-name registration online.,Industry,it will be beneficial to protect workers personal life,Error,0.0
+53,3.3,Data protection law requires companies to protect user data.,Corporate,most of the people will suppoet it,positive,0.7782
+54,4.1,Affordable Care Act provides healthcare access.,Politician,wellreceived by stakeholders,Error,0.0
+55,4.2,Right to Information Act allows citizens to request government records.,Corporate,creats a lot negative impact on corporate employees personal life,negative,0.8944
+56,1.1,Freedom of Speech protected under First Amendment.,Industry,people will take it positively,Error,0.0
+57,2.1,Freedom of Speech protected under First Amendment.,Politician,many disagree with this,negative,0.6495
+58,3.1,Cybersecurity law requires real-name registration online.,Politician,people strongly support this,Error,0.0
+59,1.2,Data protection law requires companies to protect user data.,Industry,workers will be benificial,positive,0.5408
+60,2.2,Environmental Protection Act mandates pollution control.,Industry,wellreceived by stakeholders,Error,0.0
+61,3.2,Health and Safety at Work Act ensures workplace safety.,Politician,creates additional burden,negative,0.6254
+62,1.3,Anti-Discrimination laws prohibit bias in employment.,Corporate,it brings negative impact,negative,0.9378
+63,2.3,Consumer Protection Act safeguards buyers from unfair practices.,Public,helps improve the system,Error,0.0
+64,3.3,Freedom of Speech protected under First Amendment.,Corporate,tv channels will misuse on it,positive,0.7475
+65,4.1,Data protection law requires companies to protect user data.,Politician,this clause is problematic,negative,0.9434
+66,4.2,Consumer Protection Act safeguards buyers from unfair practices.,Industry,it brings positive change,Error,0.0
+67,1.1,Data protection law requires companies to protect user data.,Public,this clause is positive,Error,0.0
+68,2.1,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,it is not a blessing for consumers,negative,0.8212
+69,3.1,Consumer Protection Act safeguards buyers from unfair practices.,Politician,creates additional burden,negative,0.6254
+70,1.2,Data protection law requires companies to protect user data.,Politician,worst decision,negative,0.906
+71,2.2,Environmental Protection Act mandates pollution control.,Public,no strong reaction,positive,0.6694
+72,3.2,Health and Safety at Work Act ensures workplace safety.,Public,wellreceived by stakeholders,Error,0.0
+73,1.3,Freedom of Speech protected under First Amendment.,Industry,people will not support this,negative,0.9572
+74,2.3,Affordable Care Act provides healthcare access.,Politician,not wellreceived by stakeholders,negative,0.8315
+75,3.3,Data protection law requires companies to protect user data.,Industry,strongly negative impact on it,negative,0.8469
+76,4.1,Minimum wage laws ensure fair pay for workers.,Politician,we expect positive impact from this clause,Error,0.0
+77,4.2,Affordable Care Act provides healthcare access.,Public,it brings challenges,Error,0.0
+78,1.1,Affordable Care Act provides healthcare access.,Industry,this clause is problematic,negative,0.9434
+79,2.1,Health and Safety at Work Act ensures workplace safety.,Corporate,many people will hate it,negative,0.9059
+80,3.1,Minimum wage laws ensure fair pay for workers.,Politician,people generally support this,positive,0.5355
+81,1.2,Consumer Protection Act safeguards buyers from unfair practices.,Politician,wellreceived by stakeholders,Error,0.0
+82,2.2,Affordable Care Act provides healthcare access.,Public,it will bring progressive impact on our society,Error,0.0
+83,3.2,Environmental Protection Act mandates pollution control.,Public,it brings positive change,Error,0.0
+84,1.3,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,people strongly support this,Error,0.0
+85,2.3,Health and Safety at Work Act ensures workplace safety.,Public,this clause is beneficial,Error,0.0
+86,3.3,Data protection law requires companies to protect user data.,Industry,for society progress it is very problematic,negative,0.892
+87,4.1,Data protection law requires companies to protect user data.,Politician,helps improve the system,Error,0.0
+88,4.2,Data protection law requires companies to protect user data.,Industry,this clause is harmful,negative,0.9576
+89,1.1,Health and Safety at Work Act ensures workplace safety.,Industry,it brings negative impact on human health,negative,0.9579
+90,2.1,Environmental Protection Act mandates pollution control.,Politician,creates additional burden,negative,0.6254
+91,3.1,Freedom of Speech protected under First Amendment.,Public,it brings positive change,Error,0.0
+92,1.2,Environmental Protection Act mandates pollution control.,Corporate,bad decision,negative,0.7747
+93,2.2,Health and Safety at Work Act ensures workplace safety.,Public,we expect progressive growth from this,Error,0.0
+94,3.2,Consumer Protection Act safeguards buyers from unfair practices.,Corporate,many disagree with this,negative,0.6495
+95,1.3,Affordable Care Act provides healthcare access.,Industry,it is a bad decision,negative,0.8937
+96,2.3,Minimum wage laws ensure fair pay for workers.,Politician,workers will not get their exact payment,negative,0.6333
+97,3.3,Cybersecurity law requires real-name registration online.,Public,this clause is beneficial,Error,0.0
+98,4.1,Freedom of Speech protected under First Amendment.,Corporate,social media will be full of adult contents,positive,0.6911
+99,4.2,Freedom of Speech protected under First Amendment.,Corporate,tv channels will misuse on it,positive,0.7475
+100,1.1,Consumer Protection Act safeguards buyers from unfair practices.,Industry,bad impact on economy of country,negative,0.8414
